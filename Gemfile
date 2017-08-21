@@ -28,6 +28,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'devise', '~> 4.3'
 gem 'carrierwave', '~> 1.1'
 gem 'mini_magick', '~> 4.8'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
