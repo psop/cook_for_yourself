@@ -1,0 +1,38 @@
+<h2>User Lists</h2>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Email</th>
+      <th>Character</th>
+      <th>conversion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.id %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+        <td>
+          <% if user.admin? %>
+            Admin
+          <% else %>
+            Users
+          <% end %>
+        </td>
+        <td>
+          <% if user.admin? %>
+            <%= link_to "Convert to User", to_normal_admin_user_path(user), method: :post, class: "btn btn-info" %>
+          <% else %>
+            <%= link_to "Convert to Admin", to_admin_admin_user_path(user), method: :post, class: "btn btn-primary" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
