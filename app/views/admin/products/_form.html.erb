@@ -27,6 +27,32 @@
     <% end %>
   </div>
 
+  <div class="row">
+    <div class="col-md-6">
+      <p>Ingredients</p>
+      <div id="ingredients">
+        <%= f.simple_fields_for :ingredients do |ingredient| %>
+          <%= render 'ingredient_fields', f: ingredient %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association 'Add Ingredient', f, :ingredients, class: "btn btn-default add-button" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <p>Directions</p>
+      <div id="directions">
+        <%= f.simple_fields_for :directions do |direction| %>
+          <%= render 'direction_fields', f: direction %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association 'Add Direction', f, :directions, class: "btn btn-default add-button" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <%= f.submit "Submit", data: { disable_with: "Submitting..." } %>
 
 <% end %>

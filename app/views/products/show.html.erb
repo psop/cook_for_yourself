@@ -1,26 +1,50 @@
-<div class="row">
-  <div class="col-md-6">
-    <% if @product.photo.present? %>
-      <%= image_tag(@product.photo.image.medium.url, class: "thumbnail") %>
-    <% else %>
-      <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
-    <% end %>
-  </div>
-  <div class="col-md-6">
-    <h2> <%= @product.title %> </h2>
-    <div style="height:100px;">
-      <p>
-        <%= @product.description %>
-      </p>
-    </div>
-    <div> Quantity: <%= @product.quantity %> </div>
-    <div class="product-price"> $ <%= @product.price %> </div>
-    <div class="pull-right">
-      <% if @product.quantity > 0 %>
-        <%= link_to "Buy", add_to_cart_product_path(@product), method: :post, :class => "btn btn-primary btn-lg btn-danger" %>
+<div class="main_content">
+  <div class="proudct_top.row">
+    <div class="col-md-4">
+      <% if @product.photo.present? %>
+        <%= image_tag(@product.photo.image.medium.url, class: "thumbnail") %>
       <% else %>
-        Sold Out!
+        <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
       <% end %>
+    </div>
+    <div class="col-md-8">
+      <div id="product_info">
+        <h1> <%= @product.title %> </h1>
+        <p class="description">
+          <%= @product.description %>
+        </p>
+      </div>
+      <div> Quantity: <%= @product.quantity %> </div>
+      <div class="product-price"> $ <%= @product.price %> </div>
+      <div class="pull-right">
+        <% if @product.quantity > 0 %>
+          <%= link_to "Buy", add_to_cart_product_path(@product), method: :post, :class => "btn btn-primary btn-lg btn-danger" %>
+        <% else %>
+          Sold Out!
+        <% end %>
+      </div>
+    </div>
+
+    <div class="ingredients">
+      <div class="col-md-6">
+        <p>Ingredients</p>
+        <ul>
+          <% @product.ingredients.each do |ingredient| %>
+            <li><%= ingredient.name %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+   
+    <div class="directions">
+      <div class="col-md-6">
+        <p>Directions</p>
+        <ul>
+          <% @product.directions.each do |direction| %>
+            <li><%= direction.step %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
