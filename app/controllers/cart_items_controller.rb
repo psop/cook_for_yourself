@@ -15,7 +15,12 @@ class CartItemsController < ApplicationController
     @cart = current_cart
     @item = @cart.cart_items.find_by(product_id: params[:id])
 
-    @item.update(item_params)
+    if @item.product.quantity >= item_params[:quantity].to_i
+      @item.update(item_params)
+      flash[:notice] = "You have changed quantity successfully."
+    else
+      flash[:warning] = "Oops! Almost sold out!"
+    end
 
     redirect_to carts_path
   end
