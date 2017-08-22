@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :welcome
 
   resources :products do
+    resources :reviews, except: [:show, :index]
     member do
       post :add_to_cart
     end

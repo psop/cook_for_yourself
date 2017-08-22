@@ -12,4 +12,6 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :directions,
                            reject_if: proc { |attributes| attributes['step'].blank? },
                            allow_destroy: true
+
+  has_many :reviews
 end

@@ -17,4 +17,5 @@ class User < ActiveRecord::Base
   end
 
   has_many :orders
+  has_many :reviews, dependent: :destroy
 end
