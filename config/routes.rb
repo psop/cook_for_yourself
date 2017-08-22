@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  namespace :account do
+    resources :orders
+  end
+
   resources :items, controller: "cart_items"
 
   resources :orders do
