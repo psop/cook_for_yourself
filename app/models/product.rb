@@ -14,4 +14,5 @@ class Product < ActiveRecord::Base
                            allow_destroy: true
 
   has_many :reviews
+  belongs_to :category
 end

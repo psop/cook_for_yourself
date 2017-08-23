@@ -1,4 +1,7 @@
 <%= simple_form_for [:admin, @product] do |f| %>
+  <div class="group">
+    <%= f.collection_select :category_id, Category.all, :id, :name, {promt: "Choose a category" } %>
+  </div>
 
   <div class="group">
     <%= f.input :title %>
