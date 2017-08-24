@@ -1,18 +1,33 @@
-<div class="row">
-  <% Category.all.each do |category| %>
-    <%= link_to category.name, products_path(category: category.name) %>
-  <%= yield %>
-  <% end %>
-  <% @products.each do |product| %>
-    <div class="col-xs-6 col-md-3">
-      <%= link_to product_path(product) do %>
-        <% if product.photo.present? %>
-          <%= image_tag(product.photo.image.thumb.url, class: "thumbnail") %>
-        <% else %>
-          <%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail") %>
+<section id="portfolio">
+  <div class="container">
+    <div class="row">
+      <ul class="portfolio-filter text-center">
+        <% Category.all.each do |category| %>
+          <%= link_to category.name, products_path(category: category.name), class: "btn btn-default" %>
+          <%= yield %>
         <% end %>
-      <% end %>
-      <%= product.title %> $ <%= product.price %>
+      </ul>
+
+      <div class="portfolio-items">
+        <% @products.each do |product| %>
+          <div class="col-xs-6 col-sm-4 col-md-3 portfolio-item">
+            <div class="portfolio-wrapper">
+              <div class="portfolio-single">
+                <%= link_to product_path(product) do %>
+                  <% if product.photo.present? %>
+                    <%= image_tag(product.photo.image.thumb.url, class: "thumbnail") %>
+                  <% else %>
+                    <%= image_tag("http://placehold.it/200x200&text=No Pic", class: "thumbnail") %>
+                  <% end %>
+                <% end %>
+                <div class="portfolio-info">
+                  <p><%= product.title %> $ <%= product.price %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-</div>
+  </div>
+</section>
