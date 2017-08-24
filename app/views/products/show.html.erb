@@ -1,73 +1,97 @@
-<div class="main_content">
-  <div class="proudct_top.row">
-    <div class="col-md-4">
-      <% if @product.photo.present? %>
-        <%= image_tag(@product.photo.image.medium.url, class: "thumbnail") %>
+<section id="company-information" class="choose">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <% if @product.photo.present? %>
+          <%= image_tag(@product.photo.image.medium.url, class: "thumbnail") %>
           <div class="star-rating" data-score= <%= @avg_review %> ></div>
-           <em><%= "#{@reviews.length} reviews" %></em>
-      <% else %>
-        <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
-      <% end %>
-    </div>
-    <div class="col-md-8">
-      <div id="product_info">
-        <h1> <%= @product.title %> </h1>
-        <p class="description">
-          <%= @product.description %>
-        </p>
+          <em><%= "#{@reviews.length} reviews" %></em>
+        <% else %>
+          <%= image_tag("http://placehold.it/400x400&text=No Pic", class: "thumbnail") %>
+        <% end %>
       </div>
-      <div> Quantity: <%= @product.quantity %> </div>
-      <div class="product-price"> $ <%= @product.price %> </div>
+
+      <div class="col-sm-6 padding-top">
+        <h1> <%= @product.title %> </h1>
+        <h2><%= @product.description %></h2>
+        <p>可購數量：<%= @product.quantity %></p>
+        <p><span style="color:#dbb075;font-weight:bold;font-size:1.5em">$ <%= @product.price %></span></p>
+      </div>
+      
       <div class="pull-right">
         <% if @product.quantity > 0 %>
-          <%= link_to "Buy", add_to_cart_product_path(@product), method: :post, :class => "btn btn-primary btn-lg btn-danger" %>
+          <%= link_to "現在就購買", add_to_cart_product_path(@product), method: :post, :class => "btn btn-common" %>
         <% else %>
           Sold Out!
         <% end %>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="ingredients">
-      <div class="col-md-6">
-        <p>Ingredients</p>
-        <ul>
-          <% @product.ingredients.each do |ingredient| %>
-            <li><%= ingredient.name %></li>
-          <% end %>
-        </ul>
+<section id="portfolio">
+  <div class="container">
+    <div class="row">
+      <div class="portfolio-items padding">
+        <div class="col-sm-6 portfolio-item">
+         <div class="portfolio-wrapper">
+          <div class="portfolio-single">
+            <p>Maggie幫你挑食材：</p>
+            <ul>
+              <% @product.ingredients.each do |ingredient| %>
+              <li><%= ingredient.name %></li>
+              <% end %>
+            </ul>
+          </div>  
+        </div>
+      </div>
+      <div class="portfolio-items">
+        <div class="col-sm-6 portfolio-item">
+         <div class="portfolio-wrapper">
+          <div class="portfolio-single">
+            <p>Sam大廚教你怎麼做：</p>
+            <ul>
+              <% @product.directions.each do |direction| %>
+              <li><%= direction.step %></li>
+              <% end %>
+            </ul>
+          </div>  
+        </div>
       </div>
     </div>
-   
-    <div class="directions">
-      <div class="col-md-6">
-        <p>Directions</p>
-        <ul>
-          <% @product.directions.each do |direction| %>
-            <li><%= direction.step %></li>
-          <% end %>
-        </ul>
+  </div>
+</section>
+
+<div class="container">
+  <div id="video-container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="page-header">看影片學做菜</h2>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/5UAWqKRPAWQ" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
   </div>
 </div>
-<%= link_to "Write a Review", new_product_review_path(@product) %>
 
-<div class="col-md-7 col-md-offset-1">
-  <h1 class="review_title"><%= @product.title %></h1>
-  <p><%= @product.description %></p>
-
-  <% if @reviews.blank? %>
-    <h3>No reviews just yet, would you like to add the first!</h3>
-    <%= link_to "Write Review", new_product_review_path(@product), class: "btn btn-danger" %>
-  <% else %>
-    <% @reviews.each do |review| %>
-      <div class="reviews">
-        <div class="star-rating" data-score= <%= review.rating %> ></div>
-          <p><%= review.comment %></p>
+<section id="blog-details" class="padding-top">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <% if @reviews.blank? %>
+          <h3>還沒有人留下任何評論，就差你了！</h3>
+          <%= link_to "我想聽你說", new_product_review_path(@product), class: "btn btn-common" %>
+        <% else %>
+          <% @reviews.each do |review| %>
+            <div class="reviews">
+              <div class="star-rating" data-score= <%= review.rating %> ></div>
+                <p><%= review.comment %></p>
+            </div>
+          <% end %>
+        <% end %>
       </div>
-    <% end %>
-  <% end %>
-</div>
+    </div>
+  </div>
+</section>  
 
 <script>
     $('.star-rating').raty({
